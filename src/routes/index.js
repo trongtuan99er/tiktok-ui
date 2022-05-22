@@ -29,6 +29,11 @@ const publicRoutes = [
     component: Search,
     layout: null,
   },
+  {
+    path: '/feedback',
+    component: Upload,
+    layout: HeaderOnly,
+  },
 ];
 const privateRoutes = [];
 

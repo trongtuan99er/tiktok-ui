@@ -15,13 +15,13 @@ function Button({
   disabled = false,
   rounded = false,
   children,
-  onlick,
+  onClick,
   className,
   ...passProps
 }) {
   let Compo = 'button';
   const props = {
-    onclick,
+    onClick,
     ...passProps,
   };
   if (disabled) {
