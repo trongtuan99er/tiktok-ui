@@ -18,6 +18,7 @@ import styles from './Header.module.scss';
 import images from '~/assets/images';
 import AccountItem from '~/components/AccountItem';
 import Menu from '~/components/Popper/Menu';
+import MenuItem from '~/components/Popper/Menu/MenuItem';
 
 const cx = classNames.bind(styles);
 
@@ -25,6 +26,21 @@ const MENU_ITEMS = [
   {
     icon: <FontAwesomeIcon icon={faEarthAsia} />,
     title: 'English',
+    children: {
+      title: 'Language',
+      data: [
+        {
+          type: 'language',
+          code: 'en',
+          title: 'English',
+        },
+        {
+          type: 'language',
+          code: 'vi',
+          title: 'Tiếng việt',
+        },
+      ],
+    },
   },
   {
     icon: <FontAwesomeIcon icon={faCircleQuestion} />,
@@ -38,12 +54,22 @@ const MENU_ITEMS = [
 ];
 function Header() {
   const [searchResult, setSearchResult] = useState([]);
+
   useEffect(() => {
     setTimeout(() => {
       setSearchResult([]);
     }, 0);
   }, []);
 
+  const handleMenuChange = (MenuItem) => {
+    switch (MenuItem.type) {
+      case 'language':
+        console.log(`change language to ${MenuItem.title}`);
+        break;
+      default:
+        console.log(MenuItem);
+    }
+  };
   return (
     <header className={cx('wrapper')}>
       <div className={cx('inner')}>
@@ -81,7 +107,7 @@ function Header() {
         <div className={cx('actions')}>
           <Button text>Upload</Button>
           <Button primary>Log in</Button>
-          <Menu items={MENU_ITEMS}>
+          <Menu items={MENU_ITEMS} onChange={handleMenuChange}>
             <button className={cx('more-btn')}>
               <FontAwesomeIcon icon={faEllipsisVertical} />
             </button>
